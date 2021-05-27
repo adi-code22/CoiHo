@@ -1,6 +1,6 @@
-# coho
+# CoHo
 
-A new Flutter project.
+A Flutter app for Doctors and Nursing staff to easily monitor and add patient vitals and display that in a common screen
 
 ## Getting Started
 
