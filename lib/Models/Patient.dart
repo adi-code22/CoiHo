@@ -10,7 +10,13 @@ import 'dart:convert';
 
 class Patient {
   Patient(
-      {this.name, this.age, this.bedNo,this.opNo,this.phone,this.track, this.critical});
+      {this.name,
+      this.age,
+      this.bedNo,
+      this.opNo,
+      this.phone,
+      this.track,
+      this.critical});
 
   String name;
   String phone;
@@ -34,7 +40,7 @@ class Patient {
         "Name": name,
         "age": age,
         "bedNo": bedNo,
-        "phone":phone,
+        "phone": phone,
         "opNo": opNo,
         "track": List<dynamic>.from(track.map((x) => x.toJson())),
       };
@@ -44,7 +50,8 @@ class Track {
   Track({
     this.time,
     this.spO2,
-    this.pressure,
+    this.pressureH,
+    this.pressureL,
     this.temp,
     this.pulse,
     this.respirRate,
@@ -52,7 +59,8 @@ class Track {
 
   String time;
   String spO2;
-  String pressure;
+  String pressureH;
+  String pressureL;
   String temp;
   String pulse;
   String respirRate;
@@ -60,7 +68,8 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) => Track(
         time: json["time"].toString(),
         spO2: json["spO2"],
-        pressure: json["pressure"],
+        pressureH: json["pressureH"],
+        pressureL: json["pressureL"],
         temp: json["temp"],
         pulse: json["pulse"],
         respirRate: json["respirRate"],
@@ -69,7 +78,8 @@ class Track {
   Map<String, dynamic> toJson() => {
         "time": time,
         "spO2": spO2,
-        "pressure": pressure,
+        "pressureH": pressureH,
+        "pressureL": pressureL,
         "temp": temp,
         "pulse": pulse,
         "respirRate": respirRate,

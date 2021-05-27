@@ -19,7 +19,8 @@ class Nurse extends StatefulWidget {
 class NurseState extends State<Nurse> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController tecSPO2 = TextEditingController();
-  final TextEditingController tecBP = TextEditingController();
+  final TextEditingController tecBPH = TextEditingController();
+  final TextEditingController tecBPL = TextEditingController();
   final TextEditingController tecTEMP = TextEditingController();
   final TextEditingController tecRESP = TextEditingController();
   final TextEditingController tecPULSE = TextEditingController();
@@ -62,7 +63,8 @@ class NurseState extends State<Nurse> {
   void initState() {
     if (widget.edit == "Yes") {
       tecSPO2.text = widget.pat.track[widget.index].spO2;
-      tecBP.text = widget.pat.track[widget.index].pressure;
+      tecBPH.text = widget.pat.track[widget.index].pressureH;
+      tecBPL.text = widget.pat.track[widget.index].pressureL;
       tecTEMP.text = widget.pat.track[widget.index].temp;
       tecRESP.text = widget.pat.track[widget.index].respirRate;
       tecPULSE.text = widget.pat.track[widget.index].pulse;
@@ -76,7 +78,8 @@ class NurseState extends State<Nurse> {
 
   void resetControllers() {
     tecSPO2.text = "";
-    tecBP.text = "";
+    tecBPH.text = "";
+    tecBPL.text = "";
     tecTEMP.text = "";
     tecRESP.text = "";
     tecPULSE.text = "";
@@ -290,18 +293,39 @@ class NurseState extends State<Nurse> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 70,
-                          width: width * .6,
-                          child: TextFormField(
-                            controller: tecBP,
-                            decoration: textInputDecoration.copyWith(
-                                labelText: 'Blood Pressure'),
-                            validator: (value) => value.isEmpty
-                                ? "  Please Enter Blood Pressure"
-                                : null,
-                            onSaved: (value) => _bp = value,
-                          ),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 70,
+                              width: width * .3,
+                              child: TextFormField(
+                                controller: tecBPH,
+                                decoration: textInputDecoration.copyWith(
+                                    labelText: 'Blood Pressure'),
+                                validator: (value) => value.isEmpty
+                                    ? "  Please Enter Blood Pressure"
+                                    : null,
+                                onSaved: (value) => _bp = value,
+                              ),
+                            ),
+                            Text(
+                              "/",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            Container(
+                              height: 70,
+                              width: width * .3,
+                              child: TextFormField(
+                                controller: tecBPL,
+                                decoration: textInputDecoration.copyWith(
+                                    labelText: 'Blood Pressure'),
+                                validator: (value) => value.isEmpty
+                                    ? "  Please Enter Blood Pressure"
+                                    : null,
+                                onSaved: (value) => _bp = value,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -318,7 +342,8 @@ class NurseState extends State<Nurse> {
                               onPrimary: Colors.white,
                             ),
                             onPressed: () {
-                              tecBP.text = "NORMAL";
+                              tecBPH.text = "NORMAL";
+                              tecBPL.text = "NORMAL";
                             },
                             child: Text("Normal")),
                       ),
@@ -475,7 +500,9 @@ class NurseState extends State<Nurse> {
                         padding: EdgeInsets.fromLTRB(60, 20, 60, 20)),
                     onPressed: () {
                       Track trac = Track(
-                          pressure: tecBP.text,
+                          respirRate: tecRESP.text,
+                          pressureH: tecBPH.text,
+                          pressureL: tecBPL.text,
                           spO2: tecSPO2.text,
                           temp: tecTEMP.text,
                           pulse: tecPULSE.text,

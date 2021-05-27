@@ -30,7 +30,8 @@ class DatabaseService {
       var temp = {
         "time": element.time,
         "spO2": element.spO2,
-        "pressure": element.pressure,
+        "pressureH": element.pressureH,
+        "pressureL": element.pressureL,
         "temp": element.temp,
         "pulse": element.pulse,
         "respirRate": element.respirRate,
@@ -61,7 +62,8 @@ class DatabaseService {
       var temp = {
         "time": element.time,
         "spO2": element.spO2,
-        "pressure": element.pressure,
+        "pressureH": element.pressureH,
+        "pressureL": element.pressureL,
         "temp": element.temp,
         "pulse": element.pulse,
         "respirRate": element.respirRate,
@@ -82,18 +84,14 @@ class DatabaseService {
   }
 
   Future<void> addPatients(
-      {String opNumber,
-      String name,
-      String age,
-      String phone,
-      String bedNo}) {
+      {String opNumber, String name, String age, String phone, String bedNo}) {
     var track = [{}];
     // track.add({"presure": null});
     Map<String, dynamic> newPatient = {
       "Name": name,
       "age": age,
       "opNo": opNumber,
-      "phone":phone??"Nil",
+      "phone": phone ?? "Nil",
       "bedNo": bedNo,
       "critical": "No",
       "track": track
