@@ -26,7 +26,7 @@ We have options for:
 
 Details like 
 - Bed Number
-- Name
+- Name 
 - Phone Number
 - OP Number
 - Age      
